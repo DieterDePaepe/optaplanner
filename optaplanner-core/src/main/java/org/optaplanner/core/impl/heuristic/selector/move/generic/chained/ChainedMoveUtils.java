@@ -24,8 +24,18 @@ import org.optaplanner.core.impl.heuristic.selector.value.chained.SubChain;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
+/**
+ * Helper class containing methods for chain moves.
+ */
 public class ChainedMoveUtils {
 
+    /**
+     * Moves a single entity from one chain to another location, informing the {@code scoreDirector} of the changes.
+     * @param scoreDirector the score director
+     * @param entity the entity to move
+     * @param variableDescriptor variable defining the chain
+     * @param toPlanningValue the new parent for the moved entity
+     */
     public static void doChainedChange(ScoreDirector scoreDirector, Object entity,
             GenuineVariableDescriptor variableDescriptor, Object toPlanningValue) {
         // TODO HACK Avoid downcast
@@ -70,7 +80,14 @@ public class ChainedMoveUtils {
         }
     }
 
-
+    /**
+     * Moves a subchain of entities as a whole to another location, informing the {@code ScoreDirector} of the
+     * changes.
+     * @param scoreDirector the score director
+     * @param subChain the chain to move
+     * @param variableDescriptor the variable defining the chain
+     * @param toPlanningValue the new parent for the moved subchain, should not be part of the specified subchain
+     */
     public static void doSubChainChange(ScoreDirector scoreDirector, SubChain subChain,
             GenuineVariableDescriptor variableDescriptor, Object toPlanningValue) {
         // TODO HACK Avoid downcast
@@ -116,6 +133,14 @@ public class ChainedMoveUtils {
         }
     }
 
+    /**
+     * Reverses a subchain of entities and moves it as a whole to another location,
+     * informing the {@code ScoreDirector} of the changes.
+     * @param scoreDirector the score director
+     * @param subChain the chain to move
+     * @param variableDescriptor the variable defining the chain
+     * @param toPlanningValue the new parent for the moved subchain, should not be part of the specified subchain
+     */
     public static void doReverseSubChainChange(ScoreDirector scoreDirector, SubChain subChain,
             GenuineVariableDescriptor variableDescriptor, Object toPlanningValue) {
         // TODO HACK Avoid downcast
@@ -126,6 +151,7 @@ public class ChainedMoveUtils {
 
         Object oldTrailingEntity = innerScoreDirector.getTrailingEntity(variableDescriptor, lastEntity);
         Object newTrailingEntity = innerScoreDirector.getTrailingEntity(variableDescriptor, toPlanningValue);
+        // The chain simply reverses in place, it does not move
         boolean unmovedReverse = firstEntity == newTrailingEntity;
         List<Object> entityList = subChain.getEntityList();
 
@@ -187,5 +213,4 @@ public class ChainedMoveUtils {
 
     private ChainedMoveUtils() {
     }
-
 }
