@@ -22,6 +22,9 @@ import org.optaplanner.core.impl.heuristic.move.Move;
 import org.optaplanner.core.impl.heuristic.selector.move.generic.ChangeMove;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
+/**
+ * A {@code Move} that moves a single chain entity to another location.
+ */
 public class ChainedChangeMove extends ChangeMove {
 
     public ChainedChangeMove(Object entity, GenuineVariableDescriptor variableDescriptor, Object toPlanningValue) {

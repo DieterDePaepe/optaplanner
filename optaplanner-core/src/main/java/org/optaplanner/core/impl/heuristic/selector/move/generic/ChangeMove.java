@@ -27,6 +27,9 @@ import org.optaplanner.core.impl.heuristic.move.AbstractMove;
 import org.optaplanner.core.impl.heuristic.move.Move;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
+/**
+ * A {@code Move} which sets a single variable of a single entity to a specified value.
+ */
 public class ChangeMove extends AbstractMove {
 
     protected final Object entity;
